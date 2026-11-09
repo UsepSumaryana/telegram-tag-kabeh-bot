@@ -1,0 +1,18 @@
+services:
+  tagall-bot:
+    build: .
+    container_name: tagall-bot
+    restart: unless-stopped
+    env_file: .env
+    environment:
+      DB_PATH: /data/members.db
+    volumes:
+      - bot-data:/data
+    logging:
+      driver: json-file
+      options:
+        max-size: "10m"
+        max-file: "3"
+
+volumes:
+  bot-data:

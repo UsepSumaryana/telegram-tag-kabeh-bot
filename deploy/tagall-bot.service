@@ -1,0 +1,25 @@
+[Unit]
+Description=Telegram Tag-All Bot
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=tagallbot
+Group=tagallbot
+WorkingDirectory=/opt/tagall-bot
+EnvironmentFile=/opt/tagall-bot/.env
+Environment=DB_PATH=/opt/tagall-bot/data/members.db
+ExecStart=/opt/tagall-bot/.venv/bin/python /opt/tagall-bot/bot.py
+Restart=always
+RestartSec=5
+
+# Hardening
+NoNewPrivileges=true
+ProtectSystem=strict
+ProtectHome=true
+PrivateTmp=true
+ReadWritePaths=/opt/tagall-bot
+
+[Install]
+WantedBy=multi-user.target
